@@ -5,7 +5,6 @@ const app = express();
 const downloader = require("./lib/downloader")
 
 
-
 //static folders for downloaded content and embedded player webpage
 app.use('/videos', express.static('videos'))
 app.use("/player", express.static('player'))
