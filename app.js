@@ -2,13 +2,14 @@ const logger=require('./lib/logging');
 const uuid = require('uuid');
 const express = require('express');
 const app = express();
-const render = require("./index")
 const downloader = require("./lib/downloader")
 
 
 
-//expose the chart images to http for the client
-app.use('/charts', express.static('charts'))
+//static folders for downloaded content and embedded player webpage
+app.use('/videos', express.static('videos'))
+app.use("/player", express.static('player'))
+
 app.use('/download', (req, res) => {
 
     let video_url = req.query["url"]
@@ -23,5 +24,3 @@ app.use('/download_complete', (req, res) => {
     res.end()
 })
 app.listen(process.env.PORT || 80)
-//generate charts based on recent data, then refresh them every half an hour
-render.startRenderingJob();
